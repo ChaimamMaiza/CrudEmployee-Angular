@@ -15,14 +15,18 @@ export class EmployeeListComponent implements OnInit {
   employees: Observable<Employee[]>;
 
   constructor(private employeeService: EmployeeService,
-    private router: Router) {}
+    private router: Router) {
+      this.reloadData1();
+    }
 
   ngOnInit() {
-    this.reloadData();
+    this.reloadData1();
   }
 
-  reloadData() {
+  reloadData1() {
+    console.log("check prb ",this.employeeService.getEmployeesList());
     this.employees = this.employeeService.getEmployeesList();
+
   }
 
   deleteEmployee(id: number) {
@@ -30,7 +34,7 @@ export class EmployeeListComponent implements OnInit {
       .subscribe(
         data => {
           console.log(data);
-          this.reloadData();
+          this.reloadData1();
         },
         error => console.log(error));
   }
